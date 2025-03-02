@@ -7,7 +7,7 @@ This repository contains datasets and scripts for replicating EBIA-CT Complement
 ```
 .
 ├── UR_CAM_analysis.txt            # Dataset with Umbrella Review results, useful to visualize the results
-├── replicating_ur_script.Rmd      # R script for replicating the UR analysis
+├── index_cam.Rmd                  # R script for replicating the UR analysis
 └── full_replication_materials/    # Folder containing RCT analysis files
     ├── sr_ma_analysis.R           # R script for analyzing the RCTs and generating meta-analytic evidence
     ├── cct_level_CAM.txt          # Dataset for Randomized Controlled Trials
@@ -22,7 +22,7 @@ This repository contains datasets and scripts for replicating EBIA-CT Complement
 The root directory contains files to visualize the Umbrella Review (UR) analysis:
 
 - `UR_CAM_analysis.txt`: Dataset containing the Umbrella Review data
-- `replicating_ur_script.R`: R script with the analysis code to reproduce results
+- `index_cam.R`: R script with the analysis code to reproduce results
 
 ## Complete results
 
