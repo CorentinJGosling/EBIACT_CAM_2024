@@ -1,0 +1,1065 @@
+---
+title: "Supplementary Materials for EBIA-CT: CAM interventions"
+author: "Gosling CJ and EBIA-CT team"
+date: "2024-06-23"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 2
+always_allow_html: true
+
+---
+    
+```{r warning=FALSE, message=FALSE, results='hide', echo=FALSE}
+library(tidyverse)
+library(metaumbrella)
+library(kableExtra)
+collapsunique <- function(x) {
+  if (sum(is.na(x)) == length(x)) {
+    return(NA)
+  } else {
+    return(
+      paste(unique(na.omit(x)), collapse=" | ")
+    )
+  }
+}
+chemin = "D:/drive_gmail/Recherche/Article 2 - Base de Donnees/7 - Data analysis/data/"
+
+source("4 - ur_analysis140424.R")
+
+```
+    
+```{r warning=FALSE, message=FALSE, results='hide', echo=FALSE}
+word = FALSE
+res_m = read.delim("supplementary - CAM/UR_CAM_analysis.txt")
+```
+
+# S1. PRIOR checklist
+```{r, echo = FALSE}
+dat_checklist = readxl::read_excel("supplementary - CAM/full_replication_materials/prior_checklist.xlsx")
+if (word) {
+  dat_checklist %>%
+  kbl() %>%
+  kable_styling(full_width = FALSE) %>%
+  column_spec(1, bold = TRUE) %>%
+  row_spec(0, bold = TRUE) %>%
+  kable_classic(full_width = FALSE, html_font = "Cambria")
+} else {
+  kbl(dat_checklist) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), position = "left") %>%
+    scroll_box(width = "100%", height = "500px")
+}
+
+```
+
+# S3. Search strategies
+```{r, echo=FALSE, fig.height=15, out.width='100%'}
+knitr::include_graphics("supplementary - CAM/full_replication_materials/Search Strategy Umbrella Reviews.PDF")
+```
+
+# S4. Classification of age groups
+
+1. Homogeneous *Preschool (<6yo)*: The 85th percentile of the distribution of the age is <6yo. 
+
+2. Homogeneous *School-age (6-12yo)*: The 25th percentile of the distribution of the age is >=6yo and the 75th percentile of the distribution of the age is < 13yo. 
+
+3. Homogeneous *Adolescents (13-19yo)*: The 25th percentile of the distribution of the age is >=13yo and the 75th percentile of the distribution of the age is < 20yo. 
+
+4. Homogeneous *Adults (>=20yo)*: The 15th percentile of the distribution of the age is >=18yo (because 18 is considered as the adult age in many countries). 
+
+# S5. Data extraction
+
+For each trial included in the meta-analysis, the first author and at least one member of the research team independently extracted data contained in the meta-analytic report. Comparisons of the extractions were made using the metaConvert R package. Extracted data included the characteristics of participants, such as the number of participants, the average age or age range, the mean total IQ or total IQ range, and the percentage of female participants. It also included data on characteristics of interventions (such as the intervention name, dosage, and length) and outcomes (such as the outcome category, the method used to assess the outcome, and the tool name). Finally, we also extracted information on the study design (NRCT vs. RCT), the type of control group (treatment as usual, eclectic, waiting list/delayed, or active control treatment), the risk of bias, and the effect size (effect size metrics, value, 95% confidence interval, standard error, or variance). When information about a clinical trial, including the age of participants, risk of bias, dosage/duration of an intervention, or type of control group, was absent from one meta-analysis but present in one or more other meta-analyses, the missing information was systematically filled in using the data from the meta-analysis with the highest methodological quality for which the information was available.
+
+# S6. Data extraction quality checks
+
+A subsequent critical step following the extraction of data was to either complete or verify the information gathered about the clinical trials included in the meta-analyses. In instances where information pertaining to the same clinical trial differed between two meta-analyses (for instance, if one classified a clinical trial as an RCT and the other as an NRCT), or when the age of the participants in a clinical trial was absent from all available meta-analyses, we proceeded to consult the full text of the clinical trial with the intention of completing or correcting the relevant information. Furthermore, this approach was employed for the estimation of effect sizes that were deemed suspect (e.g., a standardized mean difference exceeding 5, a narrow confidence interval associated with a small sample size). When the full-texts of these clinical trials were not accessible (for example, when the link provided in the references was no longer available), the authors of the meta-analyses were contacted in order to obtain the data. When we did not receive an answer from our request, or when an error was spotted in the estimation of the effect sizes, the meta-analysis was excluded from all our analyses. All calculations about effect sizes were performed using the metaConvert R package.
+
+# S7. Details on overlapping meta-analyses
+
+When facing with overlapping meta-analyses, i.e., independent meta-analyses that assessed the same PICO (population, intervention, comparator, outcome) combination, we reported the results of one meta-analysis in our primary analysis, and we reported the results of all other meta-analyses in a secondary analysis aiming to explore their concordance. To select the unique meta-analysis per PICO for our primary analysis, we started to identify all recent reviews (published after January 1st, 2018) that included CCTs with homogeneous age groups, and we selected the meta-analysis with the highest methodological quality at 5 key AMSTAR criteria (that regarded the presence of preregistration, a complete search strategy, a duplicate data selection and extraction, and a risk of bias assessment). When no recent meta-analyses with homogeneous age groups were available, we selected meta-analyses published before 2018 with homogeneous age groups, and ultimately, we selected meta-analyses that pooled together trials with heterogeneous age groups.
+
+# S8. Dependent effect sizes
+
+In cases where a given paper reported separate meta-analyses evaluating the impact of an identical intervention on disparate measures of the same outcome, the effect sizes of the trials included multiple times in the separate meta-analyses were aggregated into a single, unified effect size through the application of the standard Borenstein's aggregating approach (Borenstein et al. 2009). Then, all these indenpendent effect sizes that are quantifying the effects of the same intervention on the same outcome were pooled together. <br><br>
+For example, if a meta-analytic report conducted two meta-analyses exploring the effects of an intervention on the total scores of the CARS-2 and the ADOS-2, we properly aggregated the effect sizes of the trials included multiple times in these two meta-analyses and we pooled all the independent effect sizes into a single meta-analysis exploring the effects of the intervention on ‘Overall ASD symptoms’. 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+res_search = read.delim("supplementary - CAM/full_replication_materials/list_studies.txt")
+```
+
+# S9. Included studies
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+res_search = read.delim("supplementary - CAM/full_replication_materials/list_studies.txt")
+```
+
+```{r}
+res_included = res_search %>%
+      filter(Inclusion == "Included")
+if (word) {
+  res_included[,1:2]
+} else {
+kbl(res_included[,1:2]) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), position = "left") %>%
+    scroll_box(width = "100%", height = "500px")
+}
+nrow(res_included)
+```
+
+# S10. Excluded studies
+
+```{r}
+res_excluded = res_search %>%
+      filter(Inclusion == "Excluded")
+nrow(res_excluded)
+
+if (word) {
+  kbl(res_excluded)
+} else {
+kbl(res_excluded) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), position = "left") %>%
+    scroll_box(width = "100%", height = "500px")
+}
+
+
+tab_excluded = res_excluded %>%
+  group_by(Reasons_exclusion) %>%
+  summarise(n=n()) %>%
+  arrange(n)
+
+paste0("n-eligible = ", nrow(res_included) + sum(tab_excluded$n[tab_excluded$Reasons_exclusion %in% c("Probable errors in calculations", "Not enough information to replicate")]))
+tab_excluded
+```
+
+# S11. Primary analysis{.tabset-pills}
+
+```{r echo=FALSE, warning=FALSE, echo=FALSE}
+ASD_symptoms = c("Overall ASD symptoms" , "Social-communication", "Restricted/repetitive behaviors", "Sensory Profile")
+functioning = c("Global cognition (IQ)", "Adaptative behaviors", "Quality of life", "Language (Expressive skills)", "Language (Overall skills)", "Language (Receptive skills)") 
+safety = c("Acceptability", "Tolerability", "Adverse events")
+comorbidities = c("ADHD symptoms", "Anxiety", "Mood related symptoms")
+ASD_related = c("Disruptive behaviors", "Sleep quality", "Sleep quantity")
+
+Mind_body_medicine = c("MUSIC", "SENS", "PHYS", "rTMS", "tDCS")
+therapies_energetiques = c("ACUP");
+Natural_Product_Based_Therapies  = c(
+  "DIET", "HERB", "L-CARNIT", "L-CARNO", 
+  "MELAT", "NAC", "OXYT", "PROB", "PUFA", 
+  "SECRET", "SULFO", "VIT-D")
+systemes_medicaux_alternatifs = c("AAI")
+```
+
+```{r echo=FALSE, warning=FALSE, echo=FALSE}
+res_m$Age = factor(res_m$Age, 
+                   levels=c('< 6 yo', '6-12 yo', '13-19 yo', '>= 20 yo'))
+res_m$GRADE = factor(res_m$GRADE, 
+                   levels=c('High', 'Moderate', 'Low', 'Very low'))
+
+res_m = res_m %>%
+  mutate(Outcome_rank = factor(res_m$Outcome,
+    levels = c(
+      "Overall ASD symptoms",
+   "Social-communication", "Restricted/repetitive behaviors",
+   "Sensory Profile", "Acceptability",
+   "Tolerability", "Adverse events",
+   "Global cognition (IQ)", 
+   "Adaptive behaviors",
+   "Quality of life", 
+   "Language (Expressive skills)", 
+   "Language (Receptive skills)",
+   "Language (Overall skills)",
+   "ADHD symptoms", "Anxiety", "Mood related symptoms",
+   "Disruptive behaviors", "Sleep quality", "Sleep quantity")),
+ age_rank = factor(age_pre, levels = c(
+   "Pre-school (<6 years old)",
+   "School-age (6-12 years old)",
+   "Adolescents (13-19 years old)",
+   "Adults (>=20 years old)"
+ )),
+         col_sig = case_when(
+           eG <= -0.8 ~ "#DC5746",
+           eG <= -0.5 &  eG > -0.8 ~ "#DD8378",
+           eG <= -0.2 &  eG > -0.5 ~ "#DEADA7",
+           eG < 0.2 &  eG > -0.2 ~ "#D4D4D4",
+           eG >= 0.2 &  eG < 0.5 ~ "#A2CDAE",
+           eG >= 0.5 &  eG < 0.8 ~ "#68CD84",
+           eG >= 0.8 ~ "#30CC5C"),
+         GRADE_rank = case_when(
+           GRADE == "Very low" ~ 0,
+           GRADE == "Low" ~ 1,
+           GRADE == "Moderate" ~ 3,
+           GRADE == "High" ~ 4
+         ),
+         col_contour = case_when(
+           GRADE == "Very low" ~ "transparent",
+           GRADE != "Very low" ~ "black"
+         ),
+   Intervention_rank = case_when(
+     Intervention %in% Mind_body_medicine ~ "Mind-body",
+     Intervention %in% therapies_energetiques ~ "Energetic",
+     Intervention %in%  Natural_Product_Based_Therapies ~ "Natural",
+     Intervention %in%  systemes_medicaux_alternatifs ~ "Alternative"
+   )) %>%
+  arrange(Age, Intervention, GRADE, eG) 
+
+total_down = colSums(rbind(t(as.numeric(t(colSums(res_m[, 
+                           c("down_rob", "down_het", "down_ind", "down_imp", "down_pubbias")] == 2))) * 2),
+t(as.numeric(t(colSums(res_m[, 
+                             c("down_rob", "down_het", "down_ind", "down_imp", "down_pubbias")] == 1))))))
+
+cbind(c("down_rob", "down_het", "down_ind", "down_imp", "down_pubbias"),
+      round(prop.table(total_down)*100))
+```
+
+```{r echo=FALSE, warning=FALSE, echo=FALSE}
+res_m$paper = gsub("\\(child\\) ", "", res_m$paper)
+res_m$paper = gsub("\\(adult\\) ", "", res_m$paper)
+res_m$n_paper = length(unique(paste0(res_m$paper)))
+```
+
+## Table
+
+```{r}
+res_p = res_m %>% filter(IN_meta == 1)
+
+if (word) {
+  res_p
+} else {
+DT::datatable(res_p,
+      rownames = FALSE,
+      extensions = 'Buttons',
+      class = "display",
+      options = list(
+        # dom = c('t'),
+        scrollX = TRUE,
+        scrollCollapse = TRUE,
+
+        scrollY = "500px",
+        pageLength = nrow(res_p),
+        columnDefs = list(
+          list(width = '100px',
+               targets = "_all"),
+          list(className = 'dt-center',
+               targets = "_all")),
+        dom = c('tB'),
+        buttons = c('copy', 'csv', 'excel','pdf')
+        ))
+}
+```
+
+## Plot
+
+Primary outcomes (core symptoms and safety)
+```{r, fig.width=12, fig.height=10}
+# {.tabset .tabset-pills}
+res_p$intervention_spell = factor (res_p$intervention_spell)
+
+res_p$intervention_spell <- factor(res_p$intervention_spell, levels = sort(unique(as.character(res_p$intervention_spell)), decreasing = TRUE))
+
+res_sum = res_p %>%
+    filter(Outcome %in% c(ASD_symptoms, safety))
+
+ggplot(res_sum, aes(Outcome_rank, intervention_spell)) +
+    geom_point(shape = 21, size = 5,
+               fill="transparent",
+               aes(stroke = GRADE_rank,
+                   color = col_contour)) +
+    geom_point(shape = 21, aes(size = n_studies,
+                   fill = col_sig,
+                   color = col_sig)) +
+    geom_point(data = res_sum %>% filter(as.numeric(p_value) < 0.05),
+               aes(Outcome_rank, intervention_spell),
+               colour = "#000000",
+               size = 2,
+               shape=8) +
+    theme_bw() + 
+    facet_grid(.~ age_rank, switch = "x") +
+    theme(axis.ticks.x=element_blank(),
+          axis.text.x=element_text(size = 7, angle = 55, hjust = 0),
+        legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())+
+    scale_x_discrete(position = "top", 
+                     expand = expansion(mult = c(0.09, 0.09))) +
+    scale_y_discrete(expand = expansion(mult = c(0.05, 0.05)), drop = FALSE) +
+    scale_size_continuous(range = c(3, 5.5)) +
+    theme(plot.margin = unit(c(10,10,10,10), "mm"))+ 
+    scale_fill_manual(values = c("#DC5746" = "#DC5746", "#DD8378" = "#DD8378", "#DEADA7" = "#DEADA7", "#D4D4D4" = "#D4D4D4", "#A2CDAE" = "#BCEBBC", "#68CD84" = "#73C289", "#30CC5C" = "#09A302", "white" = "white", "transparent" = "transparent", "black" = "black")) +
+    scale_colour_manual(values = c("#DC5746" = "#DC5746", "#DD8378" = "#DD8378", "#DEADA7" = "#DEADA7", "#D4D4D4" = "#D4D4D4", "#A2CDAE" = "#BCEBBC", "#68CD84" = "#73C289", "#30CC5C" = "#09A302", "white" = "white", "transparent" = "transparent", "black" = "black", small="black", large="white")) 
+
+```
+
+
+Secondary outcomes (key ASD-related outcomes)
+```{r, width=12, height=13}
+res_sum_add = res_p %>%
+    filter(!Outcome %in% c(ASD_symptoms, safety))
+
+ggplot(res_sum_add, aes(Outcome_rank, intervention_spell)) +
+    geom_point(shape = 21, size = 5.5,
+               fill="transparent",
+               aes(stroke = GRADE_rank,
+                   color = col_contour)) +
+    geom_point(shape = 21, aes(size = n_studies,
+                   fill = col_sig,
+                   color = col_sig)) +
+    geom_point(data = . %>% filter(as.numeric(p_value) < 0.05),
+               aes(Outcome_rank, intervention_spell),
+               colour = "#000000",
+               size = 2,
+               shape=8) +
+    theme_bw() + 
+    facet_grid(.~ age_rank, switch = "x") +
+    theme(axis.ticks.x=element_blank(),
+          axis.text.x=element_text(size = 7, angle = 55, hjust = 0),
+        legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())+
+    scale_x_discrete(position = "top", 
+                     expand = expansion(mult = c(0.09, 0.09))) +
+    scale_y_discrete(expand = expansion(mult = c(0.05, 0.05)), drop = FALSE) +
+    scale_size_continuous(range = c(3, 5)) +
+    theme(plot.margin = unit(c(10,10,10,10), "mm"))+ 
+    scale_fill_manual(values = c("#DC5746" = "#DC5746", "#DD8378" = "#DD8378", "#DEADA7" = "#DEADA7", "#D4D4D4" = "#D4D4D4", "#A2CDAE" = "#BCEBBC", "#68CD84" = "#73C289", "#30CC5C" = "#09A302", "white" = "white", "transparent" = "transparent", "black" = "black")) +
+    scale_colour_manual(values = c("#DC5746" = "#DC5746", "#DD8378" = "#DD8378", "#DEADA7" = "#DEADA7", "#D4D4D4" = "#D4D4D4", "#A2CDAE" = "#BCEBBC", "#68CD84" = "#73C289", "#30CC5C" = "#09A302", "white" = "white", "transparent" = "transparent", "black" = "black", small="black", large="white")) 
+
+```
+# S12. Overlapping
+
+### Overall picture
+
+```{r}
+interval_overlap_percentage <- function(lower1, upper1, lower2, upper2) {
+  overlap = max(0, min(upper1, upper2) - max(lower1, lower2))
+  total_length = (upper1 - lower1) + (upper2 - lower2) - overlap
+  percentage_overlap = (overlap / total_length) * 100
+  return(percentage_overlap)
+}
+
+
+res_over <- res_m %>%
+  group_by(PICO_amstar) %>%
+  filter(n() > 1) %>%
+  mutate(n_SRMA = length(unique(paper))) %>%
+  group_by(PICO_amstar) %>%
+  mutate(
+   eG_meta_IN = eG[IN_meta == 1],
+   GRADE_meta_IN = GRADE[IN_meta == 1],
+   p_value_meta_IN = p_value[IN_meta == 1],
+    n = n(),
+    n_SRMA = unique(n_SRMA),
+    paper = collapsunique(paper),
+    min_es = min(eG),
+    max_es = max(eG),
+    dif_es = max(eG) - min(eG),
+    max_grade = head(sort(GRADE), 1),
+    min_grade = tail(sort(GRADE), 1),
+    prop_sig = sum(as.numeric(p_value) < 0.05) / n(),
+    avg_percentage_overlap = mean(map_dbl(combn(n(), 2, simplify = FALSE), function(idx) {
+    interval_overlap_percentage(
+      ci_lo_g[idx[1]], ci_up_g[idx[1]], 
+      ci_lo_g[idx[2]], ci_up_g[idx[2]])
+  })),
+    min_percentage_overlap = min(map_dbl(combn(n(), 2, simplify = FALSE), function(idx) {
+    interval_overlap_percentage(
+      ci_lo_g[idx[1]], ci_up_g[idx[1]], 
+      ci_lo_g[idx[2]], ci_up_g[idx[2]])
+  }))
+  ) %>%
+  arrange(PICO_amstar)
+
+overlap_factors_disc = res_over %>% 
+  # filter((PICO_hom & Age_precise == "Homogeneous") | !PICO_hom | IN_meta == 1) %>%
+  filter(abs(as.numeric(GRADE_meta_IN) - as.numeric(GRADE)) >= 2 | 
+      (abs(eG_meta_IN - eG) >= 0.30 & 
+           sum(as.numeric(p_value_meta_IN) < 0.05,
+               as.numeric(p_value) < 0.05) == 1) |
+          as.numeric(avg_percentage_overlap) < 20) %>%
+  select(PICO_amstar, Factor, IN_meta) 
+
+res_over_disc = res_over %>%
+  filter(PICO_amstar %in% overlap_factors_disc$PICO_amstar)
+
+
+
+if (word) {
+  res_over %>%
+    kbl()
+} else {
+DT::datatable(res_over)  
+}
+```
+
+### Figure
+```{r, fig.height=18, fig.width=12}
+res_m$inter_out = paste0(res_m$Intervention, " - ", res_m$Outcome)
+metaumbrella::forest(res_m %>% filter(Factor %in% res_over_disc$Factor) %>%
+    as.data.frame(),
+       layout = "RevMan5",
+       squaresize = 0.7,
+       weight.study = "same",
+       subgroup = "inter_out",
+       subgroup.name = "",
+       leftcols = c("paper", "Age", "GRADE", 
+                    "n_studies",  "rob_num", "I2", "effect.ci"),
+       leftlabs = c("Paper", "Age", "GRADE",
+                    "n-studies", "Low RoB", "I²", "eSMD + 95% CI"),
+       # sortvar = res_p$Age,
+       smlab = "Key overlapping situations"
+)
+
+```
+
+### Mind-Body Medicine
+
+#### MUSIC
+```{r, fig.height=7, fig.width=12}
+# {.tabset .tabset-pills}
+forest(res_m %>% filter(Intervention %in% "MUSIC") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR (key items)", "AMSTAR (Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (MUSIC)")
+```
+
+#### SENS
+```{r, fig.height=7, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "SENS") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR (key items)", "AMSTAR (Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (SENS)")
+```
+
+#### PHYS
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "PHYS") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR (key items)", "AMSTAR (Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (PHYS)")
+```
+
+#### rTMS
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "rTMS") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR (key items)", "AMSTAR (Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (rTMS)")
+```
+
+#### tCDS
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "tDCS") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (tDCS)")
+```
+
+### Energy Medicine
+
+#### ACUP
+```{r, fig.height=10, fig.width=12}
+# {.tabset .tabset-pills}
+forest(res_m %>% filter(Intervention %in% "ACUP") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (ACUP)")
+```
+
+### Natural Product
+
+#### Hormones
+
+##### MELAT
+```{r, fig.height=10, fig.width=12}
+# {.tabset .tabset-pills}
+# {.tabset}
+forest(res_m %>% filter(Intervention %in% "MELAT") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (MELAT)")
+```
+
+
+##### SECRET
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "SECRET") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (SECRET)")
+```
+
+##### OXYT
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "SECRET") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (SECRET)")
+```
+
+
+#### Supplementation
+
+##### HERB
+```{r, fig.height=10, fig.width=12}
+# {.tabset}
+forest(res_m %>% filter(Intervention %in% "HERB") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (HERB)")
+```
+
+##### L-CARNIT
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "L-CARNIT") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (L-CARNIT)")
+```
+
+##### L-CARNO
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "L-CARNO") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (L-CARNO)")
+```
+
+##### NAC
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "NAC") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (NAC)")
+```
+
+##### PROB
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "PROB") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (L-CARNIT)")
+```
+
+
+##### SULFO
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "SULFO") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (SULFO)")
+```
+
+##### PUFA
+```{r, fig.height=16, fig.width=12}
+res_pufa = res_m %>% filter(Intervention %in% "PUFA")
+
+forest(res_pufa %>% filter(!outcome_general %in% safety) %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (PUFA)")
+
+forest(res_pufa %>% filter(outcome_general %in% safety) %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (PUFA)")
+```
+
+##### VIT-D
+```{r, fig.height=10, fig.width=12}
+forest(res_m %>% filter(Intervention %in% "VIT-D") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (VIT-D)")
+```
+
+#### Diets
+```{r, fig.height=10, fig.width=12}
+# {.tabset}
+forest(res_m %>% filter(Intervention %in% "DIET") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (DIET)")
+```
+
+#### Whole Medical Systems 
+
+##### AAI
+```{r, fig.height=10, fig.width=12}
+# {.tabset .tabset-pills}
+forest(res_m %>% filter(Intervention %in% "AAI") %>%
+    as.data.frame(),
+       layout = "RevMan5", subgroup = "Outcome",subgroup.name = "",
+       leftcols = c("paper", "amstar", "amstar_rank", "Age", "GRADE", 
+                    "n_studies",  "rob",  "I2", "effect.ci"),
+       leftlabs = c("paper", "AMSTAR\n(key items)", "AMSTAR\n(Rank)", "Age", "GRADE", 
+                    "n-studies", "Low RoB",   "I²", "eSMD + 95% CI"),
+       smlab = "Overlapping (AAI)")
+```
+
+# SX. Writing
+
+## Characteristics 
+```{r}
+propC = function(x, R=0) {
+  x_non_na = x[!is.na(x)]
+  round(sum(x_non_na)/length(x) * 100, R)
+}
+
+paste0("The ", unique(res_m$n_paper), " retained reports explored the effects of ", 
+       length(unique(res_m$intervention_general)), " intervention types, on at least one of the ", 
+       length(unique(res_m$outcome_general)), " possible outcomes.",
+       " These reports generated a total of ", nrow(res_m), " meta-analyses",
+       " that synthesized the evidence from more than 200  CCTs, and that explored ", length(unique(res_m$PICO_amstar)), " unique PICOs.")
+
+
+res_year = res_m %>%
+  group_by(paper) %>%
+  slice(1)
+paste0("These reports were, in their vast majority (", 
+       propC(res_year$year_meta_num >= 2018), "%) published after 2018.")
+
+dat_pico_overlap = res_m %>%
+  group_by(PICO_amstar, Intervention, Outcome, Age) %>%
+  summarise(n=n()) %>%
+  filter(n > 1)
+
+
+paste0("A total of ", nrow(dat_pico_overlap), " PICOs (", round(nrow(dat_pico_overlap)/length(unique(res_m$PICO_amstar)) * 100), "%) was explored in several overlapping meta-analyses. The PICOs with the highest number of overlapping meta-analyses were investigating the effects of ", 
+        unique(dat_pico_overlap[dat_pico_overlap$n >= 6, ]$Intervention), " on ", tolower(paste(paste0(paste0(unique(dat_pico_overlap[dat_pico_overlap$n >= 6, ]$Outcome)), " (n=",
+paste0(unique(dat_pico_overlap[dat_pico_overlap$n >= 6, ]$n)), ")")
+, collapse=", ")))
+
+# paste0("The mean number of overlapping meta-analyses on the same PICO was ",
+#       round(mean(dat_pico$n), 2), " (minimum = ", 
+#       min(dat_pico$n), ", maximum = ",
+#       max(dat_pico$n), ").")
+
+# paste0(length(unique(res_m$intervention_general)), " intervention types (", sort(collapsunique(res_m$intervention_general)), ")")
+# paste0(length(unique(res_m$outcome_general)), " outcomes (", sort(collapsunique(res_m$outcome_general)), ")")
+
+
+```
+
+## Description of the meta-analyses 
+```{r}
+res_interventions = res_p %>%
+  group_by(Intervention) %>%
+  select(Outcome) %>%
+  distinct() %>%
+  summarise(n = n(),
+            outcome = collapsunique(Outcome)) %>%
+  arrange(desc(n))
+nrowInter = nrow(res_interventions)
+
+table(res_p$amstar_rank)
+dat_amstar = as.data.frame(table(res_p %>% group_by(paper) %>% slice(1) %>% ungroup%>% select(amstar_rank)))
+dat_amstar_full = as.data.frame(table(res_p %>%  select(amstar_rank)))
+
+paste0("Thus, ", length(unique(res_m$PICO_amstar)), " meta-analyses, derived from ", length(unique(res_p$paper)), " reports, were finally included in the primary analysis after discarding overlapping meta-analyses.")
+
+paste0("According to the AMSTAR-2 scoring, ",
+        dat_amstar_full[dat_amstar_full$Var1=="High", "Freq"],
+        " PICOs were evaluated by meta-analyses of high quality (",
+       round(dat_amstar_full[dat_amstar_full$Var1=="High", "Freq"] / sum(dat_amstar_full$Freq) * 100), "%), ",
+        dat_amstar_full[dat_amstar_full$Var1=="Low", "Freq"], 
+        " of low quality (",
+        round(dat_amstar_full[dat_amstar_full$Var1=="Low", "Freq"] / sum(dat_amstar_full$Freq) * 100), "%), and ", dat_amstar_full[dat_amstar_full$Var1=="Critically low", "Freq"],
+        " of critically low quality (", 
+        round(dat_amstar_full[dat_amstar_full$Var1=="Critically low", "Freq"] / sum(dat_amstar_full$Freq) * 100), "%), ",
+       
+        dat_amstar_full[dat_amstar_full$Var1=="Moderate", "Freq"], " moderate")
+paste0("According to the AMSTAR-2 scoring, ",
+        dat_amstar[dat_amstar$Var1=="High", "Freq"],
+        " of these ", length(unique(res_p$paper)), 
+        " reports were of high quality, ",
+        dat_amstar[dat_amstar$Var1=="Low", "Freq"], 
+        " of low quality, and ",
+        dat_amstar[dat_amstar$Var1=="Critically low", "Freq"],
+        " of critically low quality. ",
+        dat_amstar[dat_amstar$Var1=="Moderate", "Freq"], " moderate")
+
+paste0("The interventions that covered the largest number of outcomes were ", paste(paste0(res_interventions$Intervention[1:5], " (n=", res_interventions$n[1:5], "/",length(unique(res_p$Outcome)), ")"), collapse=", "))
+# paste0("The interventions that covered the smallest number of outcomes were ", paste(paste0(res_interventions$Intervention[(nrowInter-8):nrowInter], " (n=", res_interventions$n[(nrowInter-8):nrowInter], "/",length(unique(res_p$Outcome)), ")"), collapse=", "))
+
+res_outcomes = res_p %>%
+  group_by(Outcome) %>%
+  select(Intervention) %>%
+  distinct() %>%
+  summarise(n = n(),
+            outcome = collapsunique(Intervention)) %>%
+  arrange(desc(n))
+nrowOutcome = nrow(res_outcomes)
+paste0("and the outcomes that were covered by the largest number of interventions all regarded the efficacy of the interventions on core ASD symptoms: ", paste(paste0(tolower(res_outcomes$Outcome[1:5]), " (n=", res_outcomes$n[1:5], "/",length(unique(res_m$Intervention)), ")"), collapse=", "))
+
+res_adverse = res_p %>%
+  filter(Outcome %in% safety) %>%
+  group_by(Outcome, Intervention) %>%
+  distinct() %>%
+  summarise(n = n()) %>%
+  group_by(Intervention) %>%
+  summarise(n = n())
+paste0("Only ", nrow(res_adverse[res_adverse$n==3, ]),
+       " interventions were tested for all our safety outcomes, namely acceptability, tolerability, and the presence of adverse effects (", paste(sort(unlist(res_adverse[res_adverse$n==3, "Intervention"])), collapse=", "), "). Some others were tested for one or two of these outcomes (", paste(sort(unlist(res_adverse[res_adverse$n!=3, "Intervention"])), collapse=", "), ").")
+
+# sort(unique(lapply(res_outcomes[res_outcomes$Outcome %in% safety, "outcome"], function(x) unlist(strsplit(x, ", ")))[[1]]))
+# res_outcomes[res_outcomes$Outcome %in% safety, ]
+# sort(unique(lapply(res_outcomes[res_outcomes$Outcome %in% safety, "outcome"], function(x) unlist(strsplit(x, ", ")))[[1]]))
+
+
+
+# paste0("The outcomes that were covered by the least number of interventions were ", paste(paste0(res_outcomes$Outcome[(nrowOutcome-5):nrowOutcome], " (n=", res_outcomes$n[(nrowOutcome-5):nrowOutcome], "/",length(unique(res_p$Intervention)), ")"), collapse=", "))
+
+paste0("The median number of RCTs per meta-analysis was ",
+      quantile(res_p$n_studies, 0.5), " (IQR = [", 
+      quantile(res_p$n_studies, 0.25), ", ",
+      quantile(res_p$n_studies, 0.75), "]), and the median number of participants per meta-analysis was ",
+      quantile(res_p$total_n, 0.5), " (IQR = [", 
+      quantile(res_p$total_n, 0.25), ", ",
+      quantile(res_p$total_n, 0.75), "])")
+paste0("The median percentage of female per meta-analysis was ",
+      round(quantile(res_p$perc_female, 0.5, na.rm=TRUE)), "% (IQR = [", 
+      round(quantile(res_p$perc_female, 0.25, na.rm=TRUE)), ", ",
+      round(quantile(res_p$perc_female, 0.75, na.rm=TRUE)), "])")
+
+
+tab_Age = as.data.frame(table(res_p$Age))
+paste0("A total of ",
+       tab_Age[tab_Age$Var1=="< 6 yo", "Freq"], 
+       " meta-analyses (",
+       round(tab_Age[tab_Age$Var1=="< 6 yo", "Freq"] / nrow(res_p) * 100),
+       "%) involved very young children (<6 years old), ", 
+        tab_Age[tab_Age$Var1== "6-12 yo", "Freq"], 
+       " meta-analyses (",
+      round(tab_Age[tab_Age$Var1 == "6-12 yo", "Freq"] / nrow(res_p) * 100), "%) involved school-aged children (6-12 years old), and ",
+        tab_Age[tab_Age$Var1== "13-19 yo", "Freq"], " meta-analyses (",
+round(tab_Age[tab_Age$Var1 == "13-19 yo", "Freq"] / nrow(res_p) * 100), "%) involved adolescents (13-19 years old), and ",
+        tab_Age[tab_Age$Var1== ">= 20 yo", "Freq"], " meta-analyses (",
+round(tab_Age[tab_Age$Var1 == ">= 20 yo", "Freq"] / nrow(res_p) * 100), "%) involved adults (>= 20 years old)")
+
+tab_IQ = as.data.frame(table(res_p$IQ))
+paste0("A total of ",
+       tab_IQ[tab_IQ$Var1=="Average (80-119)", "Freq"], " meta-analyses (",
+       round(tab_IQ[tab_IQ$Var1=="Average (80-119)", "Freq"] / nrow(res_p) * 100), "%) focused on participants with overall cognitive functioning within the norm (IQ = [80-119]), ", 
+        sum(tab_IQ[tab_IQ$Var1 %in% c("Limit (70-79)", "Low (< 70)"), "Freq"]), " meta-analyses (",
+round(sum(tab_IQ[tab_IQ$Var1 %in% c("Limit (70-79)", "Low (< 70)"), "Freq"]) / nrow(res_p) * 100), "%) focused on participant with moderate or important cognitive difficulties (IQ < 80), and ",
+        nrow(res_p) - sum(tab_IQ$Freq), " (",
+       round(100-sum(tab_IQ$Freq) / nrow(res_p) * 100), "%) did not provide information on the cognitive functioning of the participants.")
+
+
+res_large = res_p %>% filter(eG > 0.5)
+res_sig = res_p %>% filter(as.numeric(p_value) < 0.05)
+res_effect = res_p %>% filter(eG > 0 & (eG > 0.5 | as.numeric(p_value) < 0.05))
+```
+
+## Effect size magnitude 
+```{r}
+paste0("The overall results indicated that ", 
+       sum(res_p$eG > 0), " meta-analyses (", propC(res_p$eG > 0), 
+       "%) had a pooled effect size in favor of the experimental group (SMD > 0, OR/RR > 1). More precisely, ", 
+       nrow(res_large), " (",
+       round(nrow(res_large) / nrow(res_p) * 100) , "%) had a magnitude that can be considered as moderate or large (SMD > 0.50), and ",
+       nrow(res_sig), " (",
+       round(nrow(res_sig) / nrow(res_p) * 100) , "%) had a statistically significant p-value (p < 0.05); (",
+       round(nrow(res_effect) / nrow(res_p) * 100), "%")
+
+paste0("It should be acknowledged that the ",
+       nrow(res_effect), " meta-analyses with moderate to large pooled effect sizes and/or statistically significant results are not without limitations, given that only ",
+       sum(res_effect$rob > 75), " of them (", propC(res_effect$rob > 75), "%) had more than 75% of their participants coming from low-risk studies.",
+       " Moreover, ",
+       sum(res_effect$I2 >= 25), " (", propC(res_effect$I2 >= 25),
+       "%) of these meta-analyses had a moderate or large inconsistency (I² >= 25%) and only ",
+       sum(as.numeric(res_effect$PI_lo_g) > 0 | as.numeric(res_effect$PI_up_g) < 0, na.rm=TRUE), " (", 
+       propC(as.numeric(res_effect$PI_lo_g) > 0 | as.numeric(res_effect$PI_up_g) < 0), "%) of the meta-analyses had a 95% prediction interval that excluded the null.")
+# . Moreover, in ", propC(res_effect$n_agreement < 0.8), "% of the meta-analyses, more than 25% of the individual effect sizes were of the opposite sign to the pooled effect size
+
+intervention_ns = unique(as.character(unlist(res_p %>%
+  filter(!Outcome %in% safety) %>%
+  group_by(Intervention) %>%
+  filter(all(as.numeric(p_value) >= 0.05)) %>%
+  select(Intervention))))
+
+intervention_s = unique(as.character(unlist(res_p %>%
+  filter(!Outcome %in% safety) %>%
+  group_by(Intervention) %>%
+  filter(any(as.numeric(p_value) < 0.05)) %>%
+  select(Intervention))))
+
+if (length(unique(append(intervention_ns, intervention_s))) != 19) {
+   stop("problem identifying ns interventions")
+}
+paste0("A total of ", length(unique(intervention_ns)), " interventions presented no evidence of efficacy on any of the target outcomes (", paste(sort(intervention_ns), collapse=", "), ").")
+# View(res_p %>%
+#        filter(Outcome == "Overall ASD symptoms"))
+       
+paste0(
+  ifelse(nrow(res_p %>% filter(eG < 0  & as.numeric(p_value) < 0.05)), " there is a detrimental effect", "there is no detrimental effect" 
+))
+```
+
+## GRADING
+```{r}
+nrow(res_p[res_p$GRADE == "High", ])
+
+dat_grade = as.data.frame(table(res_p$GRADE))
+paste0("The assessment of the certainty of evidence allowed the emergence of a very clear pattern. Of the ", nrow(res_p), " unique PICOs retained in our main analysis, ", 
+       dat_grade[dat_grade$Var1 == "High", "Freq"],
+       " reached a 'High' GRADE rating, ", 
+       dat_grade[dat_grade$Var1 == "Moderate", "Freq"],
+       " reached a 'Moderate' rating, ",
+       dat_grade[dat_grade$Var1 == "Low", "Freq"],
+       " (", round(dat_grade[dat_grade$Var1 == "Low", "Freq"] / sum(dat_grade$Freq) * 100),"%) reached a 'Low' rating, and ",
+       dat_grade[dat_grade$Var1 == "Very low", "Freq"],
+       " (", round(dat_grade[dat_grade$Var1 == "Very low", "Freq"] / sum(dat_grade$Freq) * 100), "%) reached a 'Very low' rating. ")
+
+res_mod = res_p %>% filter(GRADE == "Moderate")
+paste0("The ", nrow(res_mod), " PICOs with a 'Moderate' GRADE rating explored the effects of ", paste(paste0(res_mod$intervention_general, " on ", res_mod$outcome_general, " in ", res_mod$Age, " (SMD=", res_mod$eG, ", 95% CI=",
+                                                                                                             res_mod$eG_CI, ")"), collapse= ", "))
+
+dat_low_or_higher = res_p %>% filter(GRADE %in% c("Low", "Moderate"))
+low_mod_sig = dat_low_or_higher[dat_low_or_higher$eG > 0 & as.numeric(dat_low_or_higher$p_value) < 0.05, ]
+paste0(" ", nrow(low_mod_sig))
+
+paste0("More precisely, when considering only PICOs with a ‘Low’ or ‘Moderate’ rating, only ", paste(paste0(low_mod_sig$intervention_general, " on ", low_mod_sig$outcome_general, " in ", low_mod_sig$Age, " (SMD=", low_mod_sig$eG, ", 95% CI=",
+                                                                                                             low_mod_sig$eG_CI, ")"), collapse= ", "))
+
+```
+
+## Overlap
+
+
+
+
+```{r}
+res_over_slice = res_over %>%
+  group_by(PICO_amstar) %>%
+  slice(1)
+paste0("Among the ", length(unique(res_over$PICO_amstar)), " PICOs that were explored by at least 2 overlapping meta-analyses, the median overlap of the 95% CI of the pooled effect sizes was ",
+       round(quantile(res_over_slice$avg_percentage_overlap, 0.5)),
+       "% (IQR=[", 
+       round(quantile(res_over_slice$avg_percentage_overlap, 0.25)),
+       "%, ",
+       round(quantile(res_over_slice$avg_percentage_overlap, 0.75)),
+       "%]). Only ", 
+       sum(res_over_slice$min_grade == res_over_slice$max_grade), " (", 
+       round(sum(res_over_slice$min_grade == res_over_slice$max_grade) / nrow(res_over_slice) * 100), 
+       "%) of PICOs consistently achieved a similar GRADE rating and only ", 
+       sum(res_over_slice$prop_sig %in% c(0,1)), " (", 
+       round(sum(res_over_slice$prop_sig %in% c(0,1)) / nrow(res_over_slice) * 100), 
+       "%) consistently achieved a similar statistical significance status.") 
+
+
+fact_sig = res_p %>% 
+  filter(as.numeric(p_value) < 0.05 & 
+           PICO_amstar %in% unique(as.character(unlist(res_over$PICO_amstar)))) %>% 
+  select(PICO_amstar)
+
+res_sig_overlap = res_over %>% 
+  filter(PICO_amstar %in% as.character(unlist(fact_sig))) %>%
+  # select(PICO_amstar, Factor, p_value, prop_sig, IN_meta)
+  slice(1) %>% 
+  filter(!prop_sig %in% c(0, 1)) 
+  # %>% select(PICO_amstar, Factor, p_value, prop_sig, IN_meta)
+
+paste0("Among the ", nrow(fact_sig), " PICOs with statistically significant results in our primary analysis and at least one overlapping meta-analysis, we found that ",
+       nrow(res_sig_overlap),
+       " (",
+       round(nrow(res_sig_overlap) / nrow(fact_sig) * 100), "%) presented at least one overlapping meta-analysis with non-statistically significant results")
+
+paste0("We found ", length(unique(res_over_disc$PICO_amstar)), " PICOs that presented a large discrepancy regarding either the magnitude of the estimated effect (i.e., at least two pooled effect sizes varying by more than SMD >= 0.30 with different statistical significance status), or regarding the confidence or GRADE status differing by two points (e.g., two meta-analyses with 'Very low' versus 'Moderate' GRADE rating; Fig 4.).")
+
+
+
+
+```
+
+### OXYT restrict
+```{r, fig.width=12}
+
+dat_oxyt_rest = dcct %>% 
+   filter(intervention_general == "NAC" &
+          first_author_meta %in% c("Iffland", "Siafis (child)") &
+          outcome_general == "Disruptive behaviors") %>%
+  arrange(author, year) %>%
+  mutate(TE = ifelse(!is.na(reverse_es), -as.numeric(as.character(value)), value),
+         TE_lo = ifelse(!is.na(reverse_es), -as.numeric(as.character(ci_up)), ci_lo),
+         TE_up = ifelse(!is.na(reverse_es), -as.numeric(as.character(ci_lo)), ci_up), 
+         ID = paste0(author, " (", year, ")"))
+
+met_oxyt_res = meta::metagen(TE = as.numeric(TE),
+   lower = as.numeric(TE_lo),
+   upper = as.numeric(TE_up),
+   subgroup = ID,
+   subgroup.name = "Study",
+   studlab = meta_review,
+   data = dat_oxyt_rest)
+
+
+m2 <- meta::rob(RoB_SeqGen, RoB_Conceal, RoB_BlindPers, RoB_BlindOut, RoB_Attrition, RoB_Reporting, overall = rob, data = met_oxyt_res, tool = "rob1")
+
+meta::forest(m2,
+       layout = "RevMan5", common = FALSE, random = FALSE, 
+       leftcols = c("studlab", "effect.ci"),
+       leftlabs = c("Study","SMD [95% CI]"),
+       col.square = "gray", 
+  col.study = "black", col.square.lines = "black",
+  overall = FALSE, hetstat = FALSE)
+
+
+#        subgroup = "author",
+#        subgroup.name = ""
+# metaumbrella::forest(focus_oxyt_restrict_adult,
+#        layout = "RevMan5",
+#        subgroup = "inter_out",
+#        subgroup.name = "",
+#        leftcols = c("paper", "Age", "Age_precise", "GRADE", 
+#                     "n_studies",  "rob", "active_controls", "I2", "effect.ci"),
+#        leftlabs = c("Paper", "Age", "Age_precise", "GRADE",
+#                     "n-studies", "Low RoB", "Active controls",  "I²", "eSMD + 95% CI"),
+#        # sortvar = res_p$Age,
+#        smlab = "Key overlapping situations"
+# )
+
+```
+
+
+```{r, eval=FALSE, echo=FALSE}
+
+res_over_sig <- res_m %>%
+  group_by(PICO_amstar) %>%
+  filter(n() > 1) %>%
+  mutate(eG_meta_IN = eG[IN_meta == 1],
+         GRADE_meta_IN = GRADE[IN_meta == 1],
+         p_value_meta_IN = p_value[IN_meta == 1]) %>%
+  filter(as.numeric(p_value_meta_IN) < 0.05) %>%
+  summarise(
+    n = n(),
+    paper = collapsunique(paper),
+    factor = collapsunique(Factor),
+    min_es = min(eG),
+    max_es = max(eG),
+    dif_es = max(eG) - min(eG),
+    max_grade = head(sort(GRADE), 1),
+    min_grade = tail(sort(GRADE), 1),
+    prop_sig = sum(as.numeric(p_value) < 0.05) / n(),
+    avg_percentage_overlap = mean(map_dbl(combn(n(), 2, simplify = FALSE), function(idx) {
+    interval_overlap_percentage(
+      ci_lo_g[idx[1]], ci_up_g[idx[1]], 
+      ci_lo_g[idx[2]], ci_up_g[idx[2]])
+  })))
+
+
+nrow(res_over_sig %>% filter(prop_sig < 1)) / nrow(res_over_sig)
+
+res_discrepant = res_m %>% filter(PICO_amstar %in% res_over_disc$PICO_amstar)
+
+```
+
+
+
+```{r, eval=FALSE, echo=FALSE}
+metaumbrella::forest(res_discrepant,
+       layout = "RevMan5",
+       subgroup = "PICO_amstar",
+       subgroup.name = "",
+       leftcols = c("Intervention", "Outcome", "Age_precise", "paper", 
+                    "GRADE", 
+                    "n_studies",  "rob_num",  
+                    "I2", "effect.ci"),
+       leftlabs = c("Intervention", "Outcome", "Homogeneous Age", "Paper", 
+                    "GRADE",
+                    "n-studies", "Low RoB",   
+                    "I²", "eSMD + 95% CI"),
+       # sortvar = res_p$Age,
+       smlab = "Discrepant PICOs"
+)
+
+
+
+
+propC((res_over$min_grade == "Very low" & res_over$max_grade == "Moderate") |
+       res_over$dif_es>= 0.50 & !res_over$prop_sig %in% c(0, 1))
+
+paste0("The median overlap per meta-analysis was ",
+      quantile(res_over$avg_percentage_overlap, 0.5), " (IQR = [", 
+      quantile(res_over$avg_percentage_overlap, 0.25), ", ",
+      quantile(res_over$avg_percentage_overlap, 0.75), "])")
+
+```
+-->
