@@ -1,3 +1,4 @@
+### This is the raw file producing the entire results used in the papers
 library(tidyverse)
 library(metaumbrella)
 collapsunique <- function(x) paste(unique(sort(x)), collapse = ", ")
