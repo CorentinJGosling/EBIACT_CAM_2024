@@ -6,15 +6,14 @@ This repository contains datasets and scripts for replicating EBIA-CT Complement
 
 ```
 .
-├── UR_CAM_analysis.txt            # Dataset with Umbrella Review results, useful to visualize the results
+├── UR_CAM_analysis.txt            # Dataset with Umbrella Review results, raw data used on the platform
 ├── index_cam.Rmd                  # R script for replicating the UR analysis
 └── full_replication_materials/    # Folder containing RCT analysis files
-    ├── sr_ma_analysis.R           # R script for analyzing the RCTs and generating meta-analytic evidence
-    ├── cct_level_CAM.txt          # Dataset for Randomized Controlled Trials
+    ├── cct_level_CAM.txt          # Dataset (Controlled Trial level)
+    ├── ma_level_CAM.txt           # Dataset (Meta-analysis level)
     ├── list_studies.txt           # List of included/excluded studies
     ├── prior_checklist.xlsx       # PRIOR checklist
     ├── Search.pdf                 # Search strategies on the different databases
-    └── replicating_ma_script.Rmd  # R script for replicating SR/MA calculations
 ```
 
 ## Umbrella Review Analysis
@@ -28,20 +27,13 @@ The root directory contains files to visualize the Umbrella Review (UR) analysis
 
 The `full_replication_materials` folder contains all files generated during this umbrella review, from the list of included studies to the individual RCTs data allowing to replicate all meta-analytic calculations:
 
-- `replicating_ma_script.R`: This script automatically analyzes RCT data
-
 ## Usage
 
 1. Clone this repository
-2. For UR analysis:
+2. To replicate analyses:
 
-   - Open `replicating_ur_script.R` in R or RStudio
    - Ensure the working directory is set to the repository root
    - Run the script to analyze the `UR_CAM_analysis.xlsx` dataset
-
-3. For SR/MA analysis:
-   - Navigate to the `rct_analysis` folder
-   - Open `replicating_ma_script.R` in R or RStudio
 
 ## Requirements
 
@@ -51,7 +43,7 @@ The `full_replication_materials` folder contains all files generated during this
 
 ## License
 
--
+- GPL-3 (no commercial use without transparency)
 
 ## Contact
 
